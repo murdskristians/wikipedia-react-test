@@ -34,10 +34,12 @@ describe('App component', () => {
         expect(screen.getByText('Failed to fetch data')).toBeInTheDocument();
     });
 
-    test('fetches data when button is clicked', () => {
+    test('fetches data when button is clicked', async () => {
         const initialState: RootState = { onThisDay: { loading: false, data: [], error: null } };
         const { store } = renderWithProviders(<App />, { initialState });
+        
         fireEvent.click(screen.getByText('Fetch On This Day'));
+        
         const state = store.getState();
         expect(state.onThisDay.loading).toEqual(true);
     });
