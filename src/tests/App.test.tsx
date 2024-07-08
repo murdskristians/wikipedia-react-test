@@ -1,14 +1,13 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import App from '../components/App';
-import { RootState } from '../redux/store';
-import rootReducer from '../redux/reducers';
+import rootReducer, { RootState } from '../redux/reducers';
 
 const renderWithProviders = (
     ui: React.ReactElement,
-    { initialState, store = createStore(rootReducer, initialState) }: any = {}
+    { initialState, store = configureStore({ reducer: rootReducer, preloadedState: initialState }) }: any = {}
 ) => {
     return {
         ...render(<Provider store={store}>{ui}</Provider>),
@@ -39,7 +38,7 @@ describe('App component', () => {
         const initialState: RootState = { onThisDay: { loading: false, data: [], error: null } };
         const { store } = renderWithProviders(<App />, { initialState });
         fireEvent.click(screen.getByText('Fetch On This Day'));
-        const actions = store.getState();
-        expect(actions.onThisDay.loading).toEqual(true);
+        const state = store.getState();
+        expect(state.onThisDay.loading).toEqual(true);
     });
 });

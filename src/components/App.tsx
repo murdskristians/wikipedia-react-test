@@ -7,6 +7,7 @@ import { OnThisDayAction } from '../types';
 import OnThisDayList from './OnThisDayList';
 import Loading from './Loading';
 import ErrorModal from './ErrorModal';
+import '../App.css';
 
 type AppDispatch = ThunkDispatch<RootState, void, OnThisDayAction>;
 
@@ -20,7 +21,7 @@ const App: React.FC = () => {
 
     return (
         <div className="App">
-            <button onClick={handleFetch}>Fetch On This Day</button>
+            <button className="fetch-button" onClick={handleFetch}>Fetch On This Day</button>
             {onThisDayState.loading && <Loading />}
             {onThisDayState.error && <ErrorModal message={onThisDayState.error} />}
             <OnThisDayList events={onThisDayState.data} />

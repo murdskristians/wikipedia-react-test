@@ -24,4 +24,5 @@ const rootReducer = combineReducers({
     onThisDay: onThisDayReducer,
 });
 
+export type RootState = ReturnType<typeof rootReducer>; // Export RootState type
 export default rootReducer;
