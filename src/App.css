@@ -7,6 +7,17 @@
   pointer-events: none;
 }
 
+button {
+  margin: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.error-modal {
+  color: red;
+  font-weight: bold;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
